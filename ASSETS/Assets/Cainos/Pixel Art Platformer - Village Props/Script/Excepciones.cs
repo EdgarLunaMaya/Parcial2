@@ -27,7 +27,7 @@ public class Excepciones : MonoBehaviour
     {
         return int.Parse(_str);
     }
-  
+
     void Start()
     {
         try
@@ -35,7 +35,7 @@ public class Excepciones : MonoBehaviour
             int result = divide(10, 0);
             Debug.Log("Resultado de la division: " + result);
         }
-            catch (DivideByZeroException exception)
+        catch (DivideByZeroException exception)
         {
             Debug.Log("Error: division por cero: " + exception.Message);
         }
@@ -47,13 +47,13 @@ public class Excepciones : MonoBehaviour
             Debug.Log("Valor Obtenido: " + val);
         }
         catch (IndexOutOfRangeException ex2)
-        { 
-        Debug.LogError("Error: Indice fuera de rango. Detalles: " + ex2.Message);
+        {
+            Debug.LogError("Error: Indice fuera de rango. Detalles: " + ex2.Message);
         }
 
         try
         {
-            string str = "pepe";
+            string str = "345h";
             //int result = CastStringToInt(....);
             int result = CastStringToInt(str);
             Debug.Log("Numero convertido: " + result);
@@ -66,6 +66,30 @@ public class Excepciones : MonoBehaviour
         {
             Debug.LogError("Error general. Detalles: " + ex4.Message);
         }
+    }
+
+
+
+
+       public GameObject Glow;
+
+
+    void OnTriggerEnter2d(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            Glow.SetActive(false);
+        }
+    }
+    void OnTriggerExit2d(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            Glow.SetActive(true);
+        }
+
     }
 
     void Update()
