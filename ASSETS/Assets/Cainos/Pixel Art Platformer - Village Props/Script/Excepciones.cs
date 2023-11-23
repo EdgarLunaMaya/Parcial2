@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cainos.PixelArtTopDown_Basic;
 public class Excepciones : MonoBehaviour
 {
+    public GameObject Glow;
     int divide(int a, int b)
     { 
     if (a == 0)
@@ -71,23 +72,35 @@ public class Excepciones : MonoBehaviour
 
 
 
-       public GameObject Glow;
 
 
-    void OnTriggerEnter2d(Collider other)
+    private void OnTriggerEnter2D(Collider2D Collision)
     {
 
-        if (other.CompareTag("Player"))
-        {
-            Glow.SetActive(false);
-        }
+        if (Collision.CompareTag("Player"))
+            try
+            {
+
+                if (Collision.GetComponent<TopDownCharacterController>().id == 1)
+                {
+                    transform.parent.GetChild(0).gameObject.SetActive(false);
+                }
+                else
+                {
+                    throw new Exception("te falta nivel ");
+                            }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("Game: " + ex.Message);
+            }
     }
-    void OnTriggerExit2d(Collider other)
+    private void OnTriggerExit2D(Collider2D Collision)
     {
 
-        if (other.CompareTag("Player"))
+        if (Collision.CompareTag("Player"))
         {
-            Glow.SetActive(true);
+            transform.parent.GetChild(0).gameObject.SetActive(true);
         }
 
     }
